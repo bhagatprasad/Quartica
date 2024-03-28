@@ -26,5 +26,19 @@ namespace Quartica.Web.Service.Controllers
 
             return Ok(appuser);
         }
+        [HttpPost]
+        [Route("GenarateUserClaims")]
+        public async Task<IActionResult> GenarateUserClaims(AuthResponse authResponse)
+        {
+            try
+            {
+                var responce = await authenticationService.GenarateUserClaims(authResponse);
+                return Ok(responce);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
