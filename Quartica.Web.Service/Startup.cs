@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Quartica.Web.Service.DdContextConfiguration;
+using Quartica.Web.Service.Interfaces;
+using Quartica.Web.Service.Repository;
 using System.Text;
 
 namespace Quartica.Web.Service
@@ -35,6 +37,8 @@ namespace Quartica.Web.Service
             });
 
             services.AddMvc().AddXmlSerializerFormatters();
+
+            services.AddScoped<IUserService, UserService>();
 
             services.AddSwaggerGen(c =>
             {
