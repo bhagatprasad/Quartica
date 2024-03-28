@@ -44,6 +44,7 @@ namespace Quartica.Web.Service
 
             services.AddScoped<IUserService, UserService>();
 
+            services.AddScoped<IProductService, ProductService>();
 
             services.AddSwaggerGen(c =>
             {
