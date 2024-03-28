@@ -94,5 +94,52 @@ namespace Quartica.Web.Service.Repository
                 throw ex;
             }
         }
+
+        public async Task<ApplicationUser> GenarateUserClaims(AuthResponse authResponse)
+        {
+            try
+            {
+                var tokenkey = Encoding.ASCII.GetBytes(TokenKey);
+                var tokhand = new JwtSecurityTokenHandler();
+                SecurityToken securityToken;
+                var principle = tokhand.ValidateToken(authResponse.JwtToken,
+                    new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(tokenkey),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    }, out securityToken);
+
+                var jwttoken = securityToken as JwtSecurityToken;
+
+                if (jwttoken != null && jwttoken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256))
+                {
+                    string Username = principle.Identity.Name;
+                    User user = dbContext.users.Where(x => (x.Email == Username || x.Phone == Username) && x.IsActive).FirstOrDefault();
+                    if (user != null)
+                    {
+                        ApplicationUser app = new ApplicationUser();
+                        app.UserId = user.UserId;
+                        app.Email = user.Email;
+                        app.Name = user.Name;
+                        app.Phone = user.Phone;
+                        return app;
+                    }
+
+                    return null;
+
+                }
+                else
+                {
+                    throw new SecurityTokenException("token invalid");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
