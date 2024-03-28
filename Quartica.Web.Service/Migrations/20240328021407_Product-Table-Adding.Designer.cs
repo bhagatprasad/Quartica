@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quartica.Web.Service.DdContextConfiguration;
 
@@ -10,9 +11,11 @@ using Quartica.Web.Service.DdContextConfiguration;
 namespace Quartica.Web.Service.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240328021407_Product-Table-Adding")]
+    partial class ProductTableAdding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
@@ -49,99 +52,6 @@ namespace Quartica.Web.Service.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("activities");
-                });
-
-            modelBuilder.Entity("Quartica.Web.Service.Models.Product", b =>
-                {
-                    b.Property<long>("ProductId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Avilabulity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("CreatedOn")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long?>("ModifiedBy")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("ModifiedOn")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal?>("OfferPrice")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal?>("RegularPrice")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal?>("SalePrice")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ProductId");
-
-                    b.ToTable("products");
-                });
-
-            modelBuilder.Entity("Quartica.Web.Service.Models.ProductAuditLog", b =>
-                {
-                    b.Property<long>("ProductAuditLogId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long?>("ActivityId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("CreatedOn")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long?>("ModifiedBy")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("ModifiedOn")
-                        .HasColumnType("TEXT");
-
-                    b.Property<long?>("ProductId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ValueAfter")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ValueBefore")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ProductAuditLogId");
-
-                    b.ToTable("productAuditLogs");
                 });
 
             modelBuilder.Entity("Quartica.Web.Service.Models.User", b =>

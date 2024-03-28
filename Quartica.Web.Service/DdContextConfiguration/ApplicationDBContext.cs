@@ -17,5 +17,7 @@ namespace Quartica.Web.Service.DdContextConfiguration
         public DbSet<User> users { get; set; }
         public DbSet<Activity> activities { get; set; }
         public DbSet<UserAuditLog> userAuditLogs { get; set; }
+        public DbSet<Product> products { get; set; }
+        public DbSet<ProductAuditLog> productAuditLogs { get; set; }
     }
 }
