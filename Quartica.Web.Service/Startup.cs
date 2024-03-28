@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Quartica.Web.Service.DdContextConfiguration;
 using Quartica.Web.Service.Interfaces;
 using Quartica.Web.Service.Repository;
 using System.Text;
+using AuthenticationService = Quartica.Web.Service.Repository.AuthenticationService;
+using IAuthenticationService = Quartica.Web.Service.Interfaces.IAuthenticationService;
 
 namespace Quartica.Web.Service
 {
@@ -40,10 +44,55 @@ namespace Quartica.Web.Service
 
             services.AddScoped<IUserService, UserService>();
 
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Quartica Service", Version = "v1" });
+                c.AddSecurityDefinition("Authorization", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter the Authorization header using the Bearer scheme.",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                 {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Authorization"
+                                }
+                            },
+                            Array.Empty<string>()
+                        }
+                    });
             });
+            var tokenKey = _configuration.GetValue<string>("TokenKey");
+
+            services.AddScoped<IAuthenticationService>(x => new AuthenticationService(tokenKey, x.GetRequiredService<ApplicationDBContext>()));
+
+            var key = Encoding.ASCII.GetBytes(tokenKey);
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+
+            });
+
 
         }
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Quartica.Web.Service.Helpers;
 using Quartica.Web.Service.Interfaces;
 using Quartica.Web.Service.Models;
 
@@ -7,6 +8,7 @@ namespace Quartica.Web.Service.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [QuarticaAuthorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
