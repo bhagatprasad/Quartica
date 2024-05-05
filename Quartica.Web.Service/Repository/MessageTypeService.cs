@@ -2,6 +2,7 @@
 using Quartica.Web.Service.DdContextConfiguration;
 using Quartica.Web.Service.Interfaces;
 using Quartica.Web.Service.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Quartica.Web.Service.Repository
 {
@@ -16,6 +17,11 @@ namespace Quartica.Web.Service.Repository
         {
             var responce = await dBContext.messageTypes.ToListAsync();
             return responce;
+        }
+
+        public async Task<MessageType> fetchMessageTypesAync(long messageTypeId)
+        {
+            return await dBContext.messageTypes.FindAsync(messageTypeId);
         }
 
         public async Task<MessageType> InsertOrUpdateMessageTypeAsync(MessageType messageType)
@@ -42,6 +48,17 @@ namespace Quartica.Web.Service.Repository
             await dBContext.messageTypes.AddAsync(messageType);
             await dBContext.SaveChangesAsync();
             return messageType;
+        }
+
+        public async Task<bool> RemoveMessageType(long messageTypeId)
+        {
+            var responce = await dBContext.messageTypes.FindAsync(messageTypeId);
+            if (responce != null)
+            {
+                dBContext.messageTypes.Remove(responce);
+            }
+            var success = await dBContext.SaveChangesAsync();
+            return success == 1 ? true : false
         }
     }
 }

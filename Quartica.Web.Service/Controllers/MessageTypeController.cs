@@ -42,10 +42,7 @@ namespace Quartica.Web.Service.Controllers
 
                 var responce = await messageTypeService.InsertOrUpdateMessageTypeAsync(messageType);
 
-                if (messageType.Id > 0)
-                    return Ok(new { StatusCodes.Status200OK, responce });
-
-                return Ok(new { StatusCodes.Status201Created, responce });
+                return Ok(new { StatusCodes.Status200OK, responce });
             }
             catch (Exception ex)
             {
