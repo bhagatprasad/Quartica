@@ -46,6 +46,8 @@ namespace Quartica.Web.Service
 
             services.AddScoped<IProductService, ProductService>();
 
+            services.AddScoped<IMessageTypeService, MessageTypeService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Quartica Service", Version = "v1" });

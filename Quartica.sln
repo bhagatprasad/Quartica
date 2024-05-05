@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34302.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartica.Web.Service", "Quartica.Web.Service\Quartica.Web.Service.csproj", "{5636C0EA-D396-4CBA-9FB8-2E7ED55BBFA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartica.Web.Service", "Quartica.Web.Service\Quartica.Web.Service.csproj", "{5636C0EA-D396-4CBA-9FB8-2E7ED55BBFA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quatica.Web.Service.Test", "Quatica.Web.Service.Test\Quatica.Web.Service.Test.csproj", "{E8B36B35-7FE3-44AA-8CE7-C6162DB3E323}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{5636C0EA-D396-4CBA-9FB8-2E7ED55BBFA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5636C0EA-D396-4CBA-9FB8-2E7ED55BBFA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5636C0EA-D396-4CBA-9FB8-2E7ED55BBFA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8B36B35-7FE3-44AA-8CE7-C6162DB3E323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8B36B35-7FE3-44AA-8CE7-C6162DB3E323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8B36B35-7FE3-44AA-8CE7-C6162DB3E323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8B36B35-7FE3-44AA-8CE7-C6162DB3E323}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
