@@ -20,5 +20,6 @@ namespace Quartica.Web.Service.DdContextConfiguration
         public DbSet<Product> products { get; set; }
         public DbSet<ProductAuditLog> productAuditLogs { get; set; }
         public DbSet<MessageType> messageTypes { get; set; }
+        public DbSet<Role> roles { get; set; }
     }
 }

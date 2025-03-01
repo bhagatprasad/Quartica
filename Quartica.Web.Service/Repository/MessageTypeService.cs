@@ -58,7 +58,7 @@ namespace Quartica.Web.Service.Repository
                 dBContext.messageTypes.Remove(responce);
             }
             var success = await dBContext.SaveChangesAsync();
-            return success == 1 ? true : false
+            return success == 1 ? true : false;
         }
     }
 }
